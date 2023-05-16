@@ -4,7 +4,7 @@
   "description": "Uso framework expresss",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "server": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
