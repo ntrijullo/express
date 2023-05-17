@@ -8,5 +8,17 @@
 </head>
 <body>
     <h1>Actualizar usuario</h1>
+    <% if(user.length > 0) { %>
+    <form action="/users/update/<%= user[0]['id'] %>" method="POST">
+        <div class="row">
+            <label for="name">Name</label>
+            <input type="text" name="name" value="<%= user[0]['name'] %>">
+            <br>
+            <label for="age">Age</label>
+            <input type="number" name="age" value="<%= user[0]['age'] %>">
+        </div>
+        <button type="submit">Actualizar usuario</button>
+    </form>
+    <% } %>
 </body>
 </html>

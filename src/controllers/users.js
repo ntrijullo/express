@@ -17,7 +17,16 @@ const getCreateUser = (req,res) =>{
 }
 
 const getUpdateUser = (req,res) =>{
-    res.render('update-user')
+    const param = req.params.id
+    const sql = 'select * from users where id = ?'
+    connection.query(sql, param, (err, result)=>{
+        if(err){
+            console.log('Ha ocurrido un error')
+        }else{
+            console.log(result)
+            res.render('update-user', {user:result})
+        }
+    })
 }
 
 const getDeleteUser = (req,res) =>{
@@ -29,7 +38,7 @@ const createUser = (req, res) =>{
     const data = req.body
     connection.query(sql, data, (err, result)=>{
         if(err){
-            console.log('ha ocurrido un error')
+            console.log('Ha ocurrido un error')
         }else{
             console.log('Usuario registrado')
             res.redirect('/users/all')
@@ -39,14 +48,16 @@ const createUser = (req, res) =>{
 
 const updateUser = (req, res) =>{
     const param = req.params.id
-    for (let i = 0; i < users.length; i++) {
-        if(param == users[i].id){
-            users[i].name = req.body.name
-            users[i].age = req.body.age
-            break
+    const sql = `update users SET name= '${req.body.name}' , age= ${req.body.age} where id= ${param}`
+
+    connection.query(sql,(err, result)=>{
+        if(err){
+            console.log('Ha ocurrido un error')
+        }else{
+            console.log('Usuario actualizado')
+            res.redirect('/users/all')
         }
-    }
-    res.render('users', {users:users})
+    })
 }
 
 const deleteUser = (req, res) =>{
