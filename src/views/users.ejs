@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Todos los usuarios</h1>
+    <table>
+        <th>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Age</td>
+            </tr>
+        </th>
+        <tbody>
+            <% users.forEach((user) => { %>
+                <tr>
+                    <th><%= user.id %></th>
+                    <th><%= user.name %></th>
+                    <th><%= user.age %></th>
+                </tr>
+            <% }) %>
+
+        </tbody>
+    </table>
+</body>
+</html>
