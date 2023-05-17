@@ -4,6 +4,8 @@ const app = express();
 const port = 3000;
 const user = require('./routes/users')
 const middleware = require('./middlewares/logged')
+//crea la conexion a la db
+const connection = require('./connection')
 
 //settings
 app.set('title', 'App en node')
