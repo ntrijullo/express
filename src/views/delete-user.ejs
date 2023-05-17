@@ -5,8 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <h1>Borrar usuario</h1>
+    <form action="/users/delete/<%= user[0]['id'] %>" method="POST">
+        <h2>Desea Eliminar este usuario?</h2>
+        <a id="btn-delete" href="/users/all">Cancelar</a>
+        <input type="submit" id="btn-update" value="Si, eliminar">
+    </form>
 </body>
 </html>

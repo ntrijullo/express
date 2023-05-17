@@ -30,7 +30,17 @@ const getUpdateUser = (req,res) =>{
 }
 
 const getDeleteUser = (req,res) =>{
-    res.render('delete-user')
+    const param = req.params.id
+    const sql = 'select * from users where id = ?'
+    connection.query(sql, param, (err, result)=>{
+        if(err){
+            console.log('Ha ocurrido un error')
+        }else{
+            console.log(result)
+            res.render('delete-user', {user:result})
+        }
+    })
+
 }
 
 const createUser = (req, res) =>{
@@ -62,13 +72,15 @@ const updateUser = (req, res) =>{
 
 const deleteUser = (req, res) =>{
     const param = req.params.id
-    for (let i = 0; i < users.length; i++) {
-        if(param == users[i].id){
-            users.splice(i,1)
-            break
-        }   
-    }
-    res.render('users', {users:users})
+    const sql = 'delete from users where id = ?'
+    connection.query(sql, param, (err, result)=>{
+        if(err){
+            console.log('Ha ocurrido un error')
+        }else{
+            console.log(result)
+            res.redirect('/users/all')
+        }
+    })
 }
 
 module.exports = {
