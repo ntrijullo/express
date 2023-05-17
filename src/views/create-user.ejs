@@ -8,5 +8,15 @@
 </head>
 <body>
     <h1>Crear user</h1>
+    <form action="/users/create" method="POST">
+        <div class="row">
+            <label for="name">Name</label>
+            <input type="text" name="name">
+            <br>
+            <label for="age">Age</label>
+            <input type="number" name="age">
+        </div>
+        <button type="submit">Agregar usuario</button>
+    </form>
 </body>
 </html>

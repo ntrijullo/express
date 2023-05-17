@@ -1,11 +1,15 @@
-const users = [
-    {id:1,name:'enzo',age:'33'},
-    {id:2,name:'nelson',age:'33'},
-    {id:3,name:'epson',age:'33'}
-]
+const connection = require('../connection')
 
 const getUsers = (req,res) =>{
-    res.render('users', {users:users})
+    const sql = 'select * from users'
+    connection.query(sql, (err, result)=>{
+        if(err){
+            console.log('ha ocurrido un error')
+        }else{
+            console.log(result)
+            res.render('users', {users:result})
+        }
+    })
 }
 
 const getCreateUser = (req,res) =>{
@@ -21,8 +25,16 @@ const getDeleteUser = (req,res) =>{
 }
 
 const createUser = (req, res) =>{
-    users.push(req.body)
-    res.render('users', {users:users})
+    const sql = 'insert into users SET ?'
+    const data = req.body
+    connection.query(sql, data, (err, result)=>{
+        if(err){
+            console.log('ha ocurrido un error')
+        }else{
+            console.log('Usuario registrado')
+            res.redirect('/users/all')
+        }
+    })
 }
 
 const updateUser = (req, res) =>{
