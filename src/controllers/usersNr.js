@@ -1,19 +1,19 @@
-const connection = require('../connectionMysql')
+const User = require('../models/usersNr')
 
 const getUsers = (req,res) =>{
-    const sql = 'select * from users'
-    connection.query(sql, (err, result)=>{
+
+    User.find({}, (err, result)=>{
         if(err){
             console.log('ha ocurrido un error')
         }else{
             console.log(result)
-            res.render('users/users', {users:result, db:'mysql'})
+            res.render('usersNr/users', {users:result})
         }
     })
 }
 
 const getCreateUser = (req,res) =>{
-    res.render('users/create-user')
+    res.render('usersNr/create-user')
 }
 
 const getUpdateUser = (req,res) =>{
@@ -24,7 +24,7 @@ const getUpdateUser = (req,res) =>{
             console.log('Ha ocurrido un error')
         }else{
             console.log(result)
-            res.render('users/update-user', {user:result})
+            res.render('usersNr/update-user', {user:result})
         }
     })
 }
@@ -37,21 +37,25 @@ const getDeleteUser = (req,res) =>{
             console.log('Ha ocurrido un error')
         }else{
             console.log(result)
-            res.render('users/delete-user', {user:result})
+            res.render('usersNr/delete-user', {user:result})
         }
     })
 
 }
 
 const createUser = (req, res) =>{
-    const sql = 'insert into users SET ?'
+    
     const data = req.body
-    connection.query(sql, data, (err, result)=>{
+    const user = new User({
+        name: data.name,
+        age: data.age
+    })
+    user.save((err, result)=>{
         if(err){
             console.log('Ha ocurrido un error')
         }else{
             console.log('Usuario registrado')
-            res.redirect('/users/all')
+            res.redirect('/usersNr/all')
         }
     })
 }
@@ -65,7 +69,7 @@ const updateUser = (req, res) =>{
             console.log('Ha ocurrido un error')
         }else{
             console.log('Usuario actualizado')
-            res.redirect('/users/all')
+            res.redirect('/usersNr/all')
         }
     })
 }
@@ -78,7 +82,7 @@ const deleteUser = (req, res) =>{
             console.log('Ha ocurrido un error')
         }else{
             console.log(result)
-            res.redirect('/users/all')
+            res.redirect('/usersNr/all')
         }
     })
 }

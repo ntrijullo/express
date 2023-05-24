@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Todos los usuarios</h1>
+    <table>
+        <th>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </th>
+        <tbody>
+            <% users.forEach((user) => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.age %></td>
+                    <td><a id="btn-update" href="/usersNr/update/<%= user.id %>">Modificar</a></td>
+                    <td><a id="btn-delete" href="/usersNr/delete/<%= user.id %>">Eliminar</a></td>
+                </tr>
+            <% }) %>
+
+        </tbody>
+    </table>
+</body>
+</html>
