@@ -1,6 +1,8 @@
 const mysql = require('mysql')
-const {mysql_database} = require('./config')
+const mongoose = require('mongoose')
+const {mysql_database,mongodb} = require('./config')
 
+//mysql
 const connection = mysql.createConnection(mysql_database)
 
 connection.connect((err, conn) => {
@@ -12,4 +14,13 @@ connection.connect((err, conn) => {
     }
 })
 
-module.exports = connection
+//mongodb
+const uri = `mongodb://${mongodb.host}:${mongodb.port}/${mongodb.database}`
+const connectionnr = mongoose.connect(uri)
+.then((db)=> {
+    console.log('Conexion existosa')    
+}).catch((err)=>{
+    console.log('Ha ocurrido un error: '+err)
+})
+
+module.exports = connection,connectionnr
