@@ -18,8 +18,7 @@ const getCreateUser = (req,res) =>{
 
 const getUpdateUser = (req,res) =>{
     const param = req.params.id
-    const sql = 'select * from users where id = ?'
-    connection.query(sql, param, (err, result)=>{
+    User.find({_id:param}, (err, result)=>{
         if(err){
             console.log('Ha ocurrido un error')
         }else{
@@ -31,8 +30,8 @@ const getUpdateUser = (req,res) =>{
 
 const getDeleteUser = (req,res) =>{
     const param = req.params.id
-    const sql = 'select * from users where id = ?'
-    connection.query(sql, param, (err, result)=>{
+    
+    User.find({_id:param}, (err, result)=>{
         if(err){
             console.log('Ha ocurrido un error')
         }else{
@@ -62,9 +61,8 @@ const createUser = (req, res) =>{
 
 const updateUser = (req, res) =>{
     const param = req.params.id
-    const sql = `update users SET name= '${req.body.name}' , age= ${req.body.age} where id= ${param}`
-
-    connection.query(sql,(err, result)=>{
+    const data = req.body
+    User.findOneAndUpdate({_id: param}, data, (err, result)=>{
         if(err){
             console.log('Ha ocurrido un error')
         }else{
@@ -76,8 +74,7 @@ const updateUser = (req, res) =>{
 
 const deleteUser = (req, res) =>{
     const param = req.params.id
-    const sql = 'delete from users where id = ?'
-    connection.query(sql, param, (err, result)=>{
+    User.deleteOne({_id:param}, (err, result)=>{
         if(err){
             console.log('Ha ocurrido un error')
         }else{
